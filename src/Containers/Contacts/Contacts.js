@@ -1,18 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DataGrid from "../../Components/DataGrid";
 import ConfirmationPopup from "../../Components/ConfirmationPopup";
-import makeData from "../../makeData";
-import { Button } from "react-bootstrap";
-function Contacts() {
+// import makeData from "../../makeData";
+import { Button, Row, Col } from "react-bootstrap";
+function Contacts(props) {
+  const [contactData, setContactData] = useState(props.data);
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
+  const [recordToDelete, setRecordToDelete] = useState(null);
+
+  //   function to open confirmation popup on delete of any contact
   const onDeleteClick = (contact) => {
-    console.log("on delete click", contact);
+    setRecordToDelete(contact);
     setShowConfirmPopup(true);
   };
-  const handleDelete = (contact) => {
-    console.log("delete ", contact);
+
+  //   handle delete action and update records in DataGrid
+  const handleDelete = () => {
+    if (recordToDelete) {
+      const tempContactData = contactData.filter(
+        (data) => data.contactId !== recordToDelete
+      );
+      setContactData(tempContactData);
+    }
     setShowConfirmPopup(false);
   };
+
+  //   set headers for columns to show in grid
   const headers = React.useMemo(
     () => [
       {
@@ -37,13 +50,13 @@ function Contacts() {
       },
       {
         Header: "",
-        accessor: "action-edit",
+        accessor: "contactId",
         Cell: (row) => (
           <span>
             <Button size="sm" className="mr-2">
               Edit
             </Button>
-            <Button size="sm" onClick={onDeleteClick}>
+            <Button size="sm" onClick={() => onDeleteClick(row.value)}>
               Delete
             </Button>
           </span>
@@ -53,11 +66,19 @@ function Contacts() {
     []
   );
 
-  const data = React.useMemo(() => makeData(20), []);
-
   return (
-    <div className="Contacts">
-      <DataGrid columns={headers} data={data}></DataGrid>
+    <>
+      <Row>
+        <Col>
+          <h1>Contacts</h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <DataGrid columns={headers} data={contactData}></DataGrid>
+        </Col>
+      </Row>
+
       {showConfirmPopup && (
         <ConfirmationPopup
           heading="Delete Contact"
@@ -65,7 +86,7 @@ function Contacts() {
           handleConfirm={handleDelete}
         ></ConfirmationPopup>
       )}
-    </div>
+    </>
   );
 }
 

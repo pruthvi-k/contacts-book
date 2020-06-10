@@ -8,7 +8,6 @@ function ConfirmationPopup(props) {
     props.handleConfirm();
     setShow(false);
   };
-  //   const handleShow = () => setShow(true);
 
   return (
     <>
@@ -30,5 +29,4 @@ function ConfirmationPopup(props) {
   );
 }
 
-//render(<ConfirmationPopup />);
 export default ConfirmationPopup;
