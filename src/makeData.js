@@ -15,7 +15,7 @@ const newPerson = () => {
     address: Math.floor(Math.random() * 100),
     pin: Math.floor(Math.random() * 100),
     country: countryList[Math.floor(Math.random() * 101)],
-    contactId: namor.generate({ words: 1, numbers: 4 }),
+    contactId: generateCountryId(),
   };
 };
 
@@ -32,7 +32,7 @@ export default function makeData(...lens) {
 
   return makeDataLevel();
 }
-
+export const generateCountryId = () => namor.generate({ words: 1, numbers: 4 });
 export const countryList = [
   "Afghanistan",
   "Albania",

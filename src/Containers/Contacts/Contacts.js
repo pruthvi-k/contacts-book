@@ -1,13 +1,43 @@
 import React, { useState, useEffect } from "react";
 import DataGrid from "../../Components/DataGrid";
 import ConfirmationPopup from "../../Components/ConfirmationPopup";
-// import makeData from "../../makeData";
+import ContactForm from "./Components/ContactForm";
+import { countryList, generateCountryId } from "../../makeData";
 import { Button, Row, Col } from "react-bootstrap";
 function Contacts(props) {
   const [contactData, setContactData] = useState(props.data);
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
+  const [showAddContactForm, setShowAddContactForm] = useState(false);
   const [recordToDelete, setRecordToDelete] = useState(null);
+  const [contactFormData, setContactFormData] = useState({
+    name: "",
+    age: "",
+    address: "",
+    pin: "",
+    country: "",
+  });
 
+  const countryListOptions = React.useMemo(() =>
+    countryList.map((item) => <option value={item}>{item}</option>)
+  );
+  const handleFormInputChange = (el) => {
+    const tempContactData = {
+      ...contactFormData,
+      [el.target.name]: el.target.value,
+    };
+    setContactFormData(tempContactData);
+  };
+
+  const onHandleAddContact = (data) => {
+    //  on add contact add form's contact detail to list and clear form
+    const tempContactData = [
+      { ...data, contactId: generateCountryId() },
+      ...contactData,
+    ];
+    setContactData(tempContactData);
+
+    setShowAddContactForm(false);
+  };
   //   function to open confirmation popup on delete of any contact
   const onDeleteClick = (contact) => {
     setRecordToDelete(contact);
@@ -53,9 +83,9 @@ function Contacts(props) {
         accessor: "contactId",
         Cell: (row) => (
           <span>
-            <Button size="sm" className="mr-2">
+            {/* <Button size="sm" className="mr-2">
               Edit
-            </Button>
+            </Button> */}
             <Button size="sm" onClick={() => onDeleteClick(row.value)}>
               Delete
             </Button>
@@ -75,10 +105,30 @@ function Contacts(props) {
       </Row>
       <Row>
         <Col>
+          <Button
+            className="float-right m-1"
+            onClick={() => setShowAddContactForm(true)}
+          >
+            Add Contact
+          </Button>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
           <DataGrid columns={headers} data={contactData}></DataGrid>
         </Col>
       </Row>
-
+      {showAddContactForm && (
+        <ContactForm
+          type="Add"
+          showPopup={showAddContactForm}
+          data={contactFormData}
+          handleAddContact={onHandleAddContact}
+          handleChange={handleFormInputChange}
+          setShow={setShowAddContactForm}
+          countryList={countryListOptions}
+        ></ContactForm>
+      )}
       {showConfirmPopup && (
         <ConfirmationPopup
           heading="Delete Contact"

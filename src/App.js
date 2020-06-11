@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import Contacts from "./Containers/Contacts/Contacts";
 import makeData from "./makeData";
-
+import { Container } from "react-bootstrap";
 function App() {
   // useEffect(()=>{
 
@@ -10,9 +10,9 @@ function App() {
   // },[])
   return (
     <div className="App">
-      <div>
+      <Container fluid>
         <Contacts data={data}></Contacts>
-      </div>
+      </Container>
     </div>
   );
 }
