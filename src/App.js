@@ -1,3 +1,4 @@
+/** Main page of application */
 import React from "react";
 import "./App.css";
 import Contacts from "./Containers/Contacts/Contacts";

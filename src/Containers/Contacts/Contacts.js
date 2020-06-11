@@ -1,3 +1,6 @@
+/** Container/page for contacts
+ * state for this page is managed from here
+ */
 import React, { useState, useEffect } from "react";
 import DataGrid from "../../Components/DataGrid";
 import ConfirmationPopup from "../../Components/ConfirmationPopup";
