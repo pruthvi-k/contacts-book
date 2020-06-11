@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 
-function ContactForm(props) {
+function ContactForm({
+  data,
+  setShow,
+  showPopup,
+  countryList,
+  type,
+  handleChange,
+  handleAddContact,
+}) {
   const [validated, setValidated] = useState(false);
-  const { data, setShow, showPopup, countryList } = props;
   const handleSubmit = (event) => {
     const form = event.currentTarget;
 
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
-      props.handleAddContact(data);
+      handleAddContact(data);
     }
     event.preventDefault();
     setValidated(true);
@@ -26,7 +33,7 @@ function ContactForm(props) {
         size="lg"
       >
         <Modal.Header closeButton>
-          <Modal.Title>{props.type} Contact</Modal.Title>
+          <Modal.Title>{type} Contact</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
@@ -38,7 +45,7 @@ function ContactForm(props) {
                   type="text"
                   placeholder="Enter Name"
                   name="name"
-                  onChange={props.handleChange}
+                  onChange={handleChange}
                   value={data.name}
                 />
                 <Form.Control.Feedback type="invalid">
@@ -52,7 +59,7 @@ function ContactForm(props) {
                   type="number"
                   placeholder="Enter Age"
                   name="age"
-                  onChange={props.handleChange}
+                  onChange={handleChange}
                   value={data.age}
                   min={1}
                   max={200}
@@ -69,7 +76,7 @@ function ContactForm(props) {
                   rows="3"
                   name="address"
                   required
-                  onChange={props.handleChange}
+                  onChange={handleChange}
                   value={data.address}
                   placeholder="Enter Address"
                 />
@@ -85,7 +92,7 @@ function ContactForm(props) {
                   placeholder="Enter Pin"
                   name="pin"
                   required
-                  onChange={props.handleChange}
+                  onChange={handleChange}
                   value={data.pin}
                 />
                 <Form.Control.Feedback type="invalid">
@@ -102,7 +109,7 @@ function ContactForm(props) {
                 <Form.Control
                   as="select"
                   required
-                  onChange={props.handleChange}
+                  onChange={handleChange}
                   value={data.country}
                   name="country"
                 >
