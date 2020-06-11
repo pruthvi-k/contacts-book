@@ -1,9 +1,9 @@
 /** Container/page for contacts
  * state for this page is managed from here
  */
-import React, { useState, useEffect } from "react";
-import DataGrid from "../../Components/DataGrid";
-import ConfirmationPopup from "../../Components/ConfirmationPopup";
+import React, { useState } from "react";
+import DataGrid from "../../Components/DataGrid/index";
+import ConfirmationPopup from "../../Components/ConfirmationPopup/index";
 import ContactForm from "./Components/ContactForm";
 import { countryList, generateCountryId } from "../../makeData";
 import { Button, Row, Col } from "react-bootstrap";
@@ -86,9 +86,6 @@ function Contacts(props) {
         accessor: "contactId",
         Cell: (row) => (
           <span>
-            {/* <Button size="sm" className="mr-2">
-              Edit
-            </Button> */}
             <Button size="sm" onClick={() => onDeleteClick(row.value)}>
               Delete
             </Button>
@@ -101,7 +98,7 @@ function Contacts(props) {
 
   return (
     <>
-      <Row>
+      <Row className="mt-2">
         <Col>
           <h1>Contacts</h1>
         </Col>

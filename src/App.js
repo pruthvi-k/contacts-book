@@ -7,7 +7,7 @@ import { Container } from "react-bootstrap";
 function App() {
   // useEffect(()=>{
 
-  const data = makeData(10);
+  const data = makeData(100);
   // },[])
   return (
     <div className="App">
