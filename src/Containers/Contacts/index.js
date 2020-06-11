@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 import DataGrid from "../../Components/DataGrid/index";
 import ConfirmationPopup from "../../Components/ConfirmationPopup/index";
-import ContactForm from "./Components/ContactForm";
+import ContactForm from "../../Components/ContactForm/index";
 import { countryList, generateCountryId } from "../../makeData";
 import { Button, Row, Col } from "react-bootstrap";
 function Contacts(props) {
@@ -20,8 +20,9 @@ function Contacts(props) {
     country: "",
   });
 
-  const countryListOptions = React.useMemo(() =>
-    countryList.map((item) => <option value={item}>{item}</option>)
+  const countryListOptions = React.useMemo(
+    () => countryList.map((item) => <option value={item}>{item}</option>),
+    []
   );
   const handleFormInputChange = (el) => {
     const tempContactData = {
