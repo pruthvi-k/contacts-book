@@ -1,5 +1,6 @@
-import React from "react";
-import { useTable } from "react-table";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useTable } from 'react-table';
 function DataGrid({ columns, data }) {
   // Use the state and functions returned from useTable to build  UI
   const {
@@ -20,7 +21,7 @@ function DataGrid({ columns, data }) {
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
             ))}
           </tr>
         ))}
@@ -29,9 +30,9 @@ function DataGrid({ columns, data }) {
         {rows.map((row, i) => {
           prepareRow(row);
           return (
-            <tr {...row.getRowProps()}>
+            <tr {...row.getRowProps()} key={`${i}-table-row`}>
               {row.cells.map((cell) => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
               })}
             </tr>
           );
@@ -40,5 +41,8 @@ function DataGrid({ columns, data }) {
     </table>
   );
 }
-
+DataGrid.propTypes = {
+  data: PropTypes.array,
+  columns: PropTypes.array,
+};
 export default DataGrid;

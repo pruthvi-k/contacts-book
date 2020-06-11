@@ -1,7 +1,12 @@
-import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Button, Modal } from 'react-bootstrap';
 
-function ConfirmationPopup({ showPopup, handleConfirm, heading }) {
+function ConfirmationPopup({
+  showPopup,
+  handleConfirm,
+  heading = 'Confrimation Popup',
+}) {
   const [show, setShow] = useState(showPopup || false);
 
   const handleClose = () => {
@@ -28,5 +33,9 @@ function ConfirmationPopup({ showPopup, handleConfirm, heading }) {
     </>
   );
 }
-
+ConfirmationPopup.propTypes = {
+  showPopup: PropTypes.func.isRequired,
+  handleConfirm: PropTypes.func.isRequired,
+  heading: PropTypes.string,
+};
 export default ConfirmationPopup;

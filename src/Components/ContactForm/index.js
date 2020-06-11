@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { Button, Modal, Form, Row, Col } from "react-bootstrap";
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
+import { Button, Modal, Form, Row, Col } from 'react-bootstrap';
 
 function ContactForm({
   data,
@@ -138,5 +140,14 @@ function ContactForm({
     </>
   );
 }
+ContactForm.propTypes = {
+  data: PropTypes.array,
+  setShow: PropTypes.func,
+  showPopup: PropTypes.func,
+  countryList: PropTypes.array,
+  type: PropTypes.string,
+  handleChange: PropTypes.func,
+  handleAddContact: PropTypes.func,
+};
 
 export default ContactForm;

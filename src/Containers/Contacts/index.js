@@ -1,23 +1,26 @@
 /** Container/page for contacts
  * state for this page is managed from here
  */
-import React, { useState } from "react";
-import DataGrid from "../../Components/DataGrid/index";
-import ConfirmationPopup from "../../Components/ConfirmationPopup/index";
-import ContactForm from "../../Components/ContactForm/index";
-import { countryList, generateCountryId } from "../../makeData";
-import { Button, Row, Col } from "react-bootstrap";
-function Contacts(props) {
-  const [contactData, setContactData] = useState(props.data);
+import React, { useState } from 'react';
+import { Button, Row, Col } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+
+import DataGrid from '../../Components/DataGrid/index';
+import ConfirmationPopup from '../../Components/ConfirmationPopup/index';
+import ContactForm from '../../Components/ContactForm/index';
+import { countryList, generateCountryId } from '../../makeData';
+
+function Contacts({ data }) {
+  const [contactData, setContactData] = useState(data);
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
   const [showAddContactForm, setShowAddContactForm] = useState(false);
   const [recordToDelete, setRecordToDelete] = useState(null);
   const [contactFormData, setContactFormData] = useState({
-    name: "",
-    age: "",
-    address: "",
-    pin: "",
-    country: "",
+    name: '',
+    age: '',
+    address: '',
+    pin: '',
+    country: '',
   });
 
   const countryListOptions = React.useMemo(
@@ -27,7 +30,7 @@ function Contacts(props) {
           {item}
         </option>
       )),
-    []
+    [],
   );
   const handleFormInputChange = (el) => {
     const tempContactData = {
@@ -47,11 +50,11 @@ function Contacts(props) {
 
     setShowAddContactForm(false);
     setContactFormData({
-      name: "",
-      age: "",
-      address: "",
-      pin: "",
-      country: "",
+      name: '',
+      age: '',
+      address: '',
+      pin: '',
+      country: '',
     });
   };
   //   function to open confirmation popup on delete of any contact
@@ -64,7 +67,7 @@ function Contacts(props) {
   const handleDelete = () => {
     if (recordToDelete) {
       const tempContactData = contactData.filter(
-        (data) => data.contactId !== recordToDelete
+        (data) => data.contactId !== recordToDelete,
       );
       setContactData(tempContactData);
     }
@@ -75,28 +78,28 @@ function Contacts(props) {
   const headers = React.useMemo(
     () => [
       {
-        Header: "Name",
-        accessor: "name",
+        Header: 'Name',
+        accessor: 'name',
       },
       {
-        Header: "Age",
-        accessor: "age",
+        Header: 'Age',
+        accessor: 'age',
       },
       {
-        Header: "Address",
-        accessor: "address",
+        Header: 'Address',
+        accessor: 'address',
       },
       {
-        Header: "Pin",
-        accessor: "pin",
+        Header: 'Pin',
+        accessor: 'pin',
       },
       {
-        Header: "Country",
-        accessor: "country",
+        Header: 'Country',
+        accessor: 'country',
       },
       {
-        Header: "",
-        accessor: "contactId",
+        Header: '',
+        accessor: 'contactId',
         Cell: (row) => (
           <span>
             <Button size="sm" onClick={() => onDeleteClick(row.value)}>
@@ -106,7 +109,7 @@ function Contacts(props) {
         ),
       },
     ],
-    []
+    [],
   );
 
   return (
@@ -152,5 +155,8 @@ function Contacts(props) {
     </>
   );
 }
+Contacts.propTypes = {
+  data: PropTypes.array,
+};
 
 export default Contacts;
