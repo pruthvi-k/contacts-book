@@ -46,6 +46,13 @@ function Contacts(props) {
     setContactData(tempContactData);
 
     setShowAddContactForm(false);
+    setContactFormData({
+      name: "",
+      age: "",
+      address: "",
+      pin: "",
+      country: "",
+    });
   };
   //   function to open confirmation popup on delete of any contact
   const onDeleteClick = (contact) => {
