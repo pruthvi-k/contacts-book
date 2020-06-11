@@ -3,7 +3,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import ConfirmationPopup from "./index";
 
-test("renders learn react link", () => {
+test("renders confirmation poup correctly", () => {
   const ConfirmationPopupComponent = renderer
     .create(<ConfirmationPopup show />)
     .toJSON();
