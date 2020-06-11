@@ -10,10 +10,10 @@ const range = (len) => {
 
 const newPerson = () => {
   return {
-    name: namor.generate({ words: 1, numbers: 0 }),
-    age: Math.floor(Math.random() * 30),
-    address: Math.floor(Math.random() * 100),
-    pin: Math.floor(Math.random() * 100),
+    name: namor.generate({ words: 2, saltLength: 0 }),
+    age: namor.generate({ words: 0, saltLength: 2, saltType: "number" }),
+    address: namor.generate({ words: 3, saltLength: 0 }),
+    pin: namor.generate({ words: 0, saltLength: 6, saltType: "number" }), //Math.floor(Math.random() * 100),
     country: countryList[Math.floor(Math.random() * 101)],
     contactId: generateCountryId(),
   };
@@ -32,7 +32,8 @@ export default function makeData(...lens) {
 
   return makeDataLevel();
 }
-export const generateCountryId = () => namor.generate({ words: 1, numbers: 4 });
+export const generateCountryId = () =>
+  namor.generate({ words: 1, saltLength: 4 });
 export const countryList = [
   "Afghanistan",
   "Albania",

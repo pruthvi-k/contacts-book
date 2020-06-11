@@ -87,7 +87,7 @@ function ContactForm(props) {
                   value={data.pin}
                 />
                 <Form.Control.Feedback type="invalid">
-                  Please provide a valid pin.
+                  Please enter pin.
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group
