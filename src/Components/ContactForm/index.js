@@ -123,7 +123,7 @@ function ContactForm({
             </Form.Row>
             <hr />
             <Row>
-              <Col>
+              <Col className="text-center">
                 <Button variant="primary" className="mr-2" type="submit">
                   Add
                 </Button>
