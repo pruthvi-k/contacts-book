@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 
 function ContactForm(props) {
-  // const [show, setShow] = useState(props.showPopup || false);
   const [validated, setValidated] = useState(false);
   const { data, setShow, showPopup, countryList } = props;
   const handleSubmit = (event) => {
@@ -37,7 +36,7 @@ function ContactForm(props) {
                 <Form.Control
                   required
                   type="text"
-                  placeholder="Name"
+                  placeholder="Enter Name"
                   name="name"
                   onChange={props.handleChange}
                   value={data.name}
@@ -51,10 +50,12 @@ function ContactForm(props) {
                 <Form.Control
                   required
                   type="number"
-                  placeholder="age"
+                  placeholder="Enter Age"
                   name="age"
                   onChange={props.handleChange}
                   value={data.age}
+                  min={1}
+                  max={200}
                 />
                 <Form.Control.Feedback type="invalid">
                   Please enter age.
@@ -70,6 +71,7 @@ function ContactForm(props) {
                   required
                   onChange={props.handleChange}
                   value={data.address}
+                  placeholder="Enter Address"
                 />
                 <Form.Control.Feedback type="invalid">
                   Please enter address.
@@ -80,7 +82,7 @@ function ContactForm(props) {
                 <Form.Label>Pin</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Pin"
+                  placeholder="Enter Pin"
                   name="pin"
                   required
                   onChange={props.handleChange}
@@ -104,7 +106,7 @@ function ContactForm(props) {
                   value={data.country}
                   name="country"
                 >
-                  <option value="">-- select country --</option>
+                  <option value="">-- Select Country --</option>
                   {countryList}
                 </Form.Control>
                 <Form.Control.Feedback type="invalid">

@@ -21,7 +21,12 @@ function Contacts(props) {
   });
 
   const countryListOptions = React.useMemo(
-    () => countryList.map((item) => <option value={item}>{item}</option>),
+    () =>
+      countryList.map((item) => (
+        <option key={item} value={item}>
+          {item}
+        </option>
+      )),
     []
   );
   const handleFormInputChange = (el) => {
